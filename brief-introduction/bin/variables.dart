@@ -53,6 +53,5 @@ void variableTest() {
 }
 
 void main(List<String> arguments) {
-  print("\n4. Variable test");
   variableTest();
 }

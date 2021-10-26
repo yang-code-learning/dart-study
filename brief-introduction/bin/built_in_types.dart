@@ -1,4 +1,4 @@
-void builtInTest() {
+void numberTest() {
   /* Number */
   var x = 1; // regular integar type
   var hex = 0xDEADBEEF; // integar type in hexadecimal
@@ -26,7 +26,9 @@ void builtInTest() {
   print("bitwise shift: (3 << 1) = " + (3 << 1).toString()); // 0011 << 1 = 0110
   print("bitwise XOR: (3 | 4) = " + (3 | 4).toString()); // 0011 | 0100 = 0111
   print("bitwise AND: (3 & 4) = " + (3 & 4).toString()); // 0011 & 0100 = 0000
+}
 
+void stringTest() {
   /* String */
   /* var s1 = 'Single quotes work well for string literals.';
    * var s2 = "Double quotes work just as well.";
@@ -72,14 +74,17 @@ void builtInTest() {
   const aConstString = 'a constant string';
   const validConstString = '$aConstNum $aConstBool $aConstString';
   print(validConstString);
-  // These do NOT work in a const string(it's ok with var).
+
+  // here do NOT work in a const string(it's ok with var in invalidConstString).
   var aNum = 0;
   var aBool = true;
   var aString = 'a string';
   const aConstList = [1, 2, 3];
   var invalidConstString = '$aNum $aBool $aString $aConstList';
   print(invalidConstString);
+}
 
+void booleanTest() {
   /* Booleans */
   // Check for an empty string.
   var fullName = '';
@@ -94,7 +99,9 @@ void builtInTest() {
   // Check for NaN.
   var iMeantToDoThis = 0 / 0;
   assert(iMeantToDoThis.isNaN);
+}
 
+void listTest() {
   /* Lists */
   var list1 = [1, 2, 3]; // regular list<int>
   var list2 = [
@@ -103,9 +110,41 @@ void builtInTest() {
     'Plane',
   ]; // can add a comma after the last item
   print("list1: $list1, list2: $list2");
+
+  // get a list’s length
+  var list = [1, 2, 3];
+  assert(list.length == 3);
+  assert(list[1] == 2);
+
+  list[1] = 1;
+  assert(list[1] == 1);
+
+  // using collection if to create a list
+  var promoActive = true;
+  var nav = [
+    'Home',
+    'Furniture',
+    'Plants',
+    if (promoActive) 'Outlet',
+  ];
+  print(nav);
+
+  // using collection for to manipulate the items of a list
+  var listOfInts = [1, 2, 3];
+  var listOfStrings = [
+    '#0',
+    for (var i in listOfInts) '#$i',
+  ];
+  print(listOfStrings);
+}
+
+void setTest() {
+  /* Sets */
 }
 
 void main(List<String> arguments) {
-  print("\n5. Built-in type test");
-  builtInTest();
+  numberTest();
+  stringTest();
+  booleanTest();
+  listTest();
 }
