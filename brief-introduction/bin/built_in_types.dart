@@ -1,3 +1,5 @@
+import 'package:characters/characters.dart';
+
 void numberTest() {
   /* Number */
   var x = 1; // regular integar type
@@ -135,16 +137,108 @@ void listTest() {
     '#0',
     for (var i in listOfInts) '#$i',
   ];
+  assert(listOfStrings[1] == '#1');
   print(listOfStrings);
 }
 
 void setTest() {
-  /* Sets */
+  // created using a set literal
+  var halogens = {
+    'fluorine',
+    'chlorine',
+    'bromine',
+    'iodine',
+    'astatine',
+  };
+  print(halogens);
+
+  // To create an empty set, use {} preceded by a type argument
+  var names = <String>{};
+  // Set<String> names = {}; // This works, too.
+  // var names = {}; // Creates a map, not a set.
+  print(names);
+
+  // Add items to an existing set
+  var elements = <String>{};
+  elements.add('fluorine');
+  elements.addAll(halogens);
+
+  // get the number of items in the set
+  assert(elements.length == 5);
+
+  // create a set that’s a compile-time constant
+  final constantSet = const {
+    // this const is necessary
+    'fluorine',
+    'chlorine',
+    'bromine',
+    'iodine',
+    'astatine',
+  };
+  // constantSet.add('helium'); // This line will cause an error.
+  print(constantSet);
+}
+
+void mapTest() {
+  // Dart maps, created using map literals
+  var nobleGases = {
+    // Key:    Value
+    2: 'helium',
+    10: 'neon',
+    18: 'argon',
+  };
+  print(nobleGases);
+
+  // create the same objects using a Map constructor
+  var gifts = <String, String>{};
+  // same as var gifts = Map<String, String>();
+  gifts['first'] = 'partridge';
+  gifts['second'] = 'turtledoves';
+  gifts['fifth'] = 'golden rings';
+  print(gifts);
+
+  // Add a new key-value pair
+  gifts['fourth'] = 'calling birds'; // Add a key-value pair
+  print(gifts);
+
+  // Retrieve a value from a map
+  assert(gifts['first'] == 'partridge');
+
+  // look for a key that isn’t in a map, you get a null in return
+  assert(gifts['fifth'] == null);
+
+  // Use .length to get the number of key-value pairs in the map
+  print("the length of gift map is: " + gifts.length.toString());
+
+  // create a map that’s a compile-time constant
+  final constantMap = const {
+    // const before the map literal is needed
+    2: 'helium',
+    10: 'neon',
+    18: 'argon',
+  };
+  // constantMap[2] = 'Helium'; // This line will cause an error.
+  print(constantMap);
+}
+
+void runesTest() {
+  var hi = 'Hi 🇩🇰';
+  print(hi);
+  print('The end of the string: ${hi.substring(hi.length - 1)}');
+  print('The last character: ${hi.characters.last}\n');
+}
+
+void symbolTest() {
+  print("nothing to operate");
 }
 
 void main(List<String> arguments) {
-  numberTest();
-  stringTest();
-  booleanTest();
-  listTest();
+  // numberTest();
+  // stringTest();
+  // booleanTest();
+  // listTest();
+  // setTest();
+  // mapTest();
+  // runesTest();
+  // symbolTest();
 }
