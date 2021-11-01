@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_function_declarations_over_variables, avoid_function_literals_in_foreach_calls
 
-/* Examples */
+/* 0. Examples */
 // an example of implementing a function
 var _nobleGases = <int?>[];
 bool isNoble1(int atomicNumber) {
@@ -15,7 +15,7 @@ isNoble2(atomicNumber) {
 // can use a shorthand syntax
 bool isNoble3(int atomicNumber) => _nobleGases[atomicNumber] != null;
 
-/* Parameters */
+/* 1. Parameters */
 // When calling a function, specify named parameters using paramName: value
 void enableFlags1({bool? bold, bool? hidden}) {}
 // enableFlags(bold: true, hidden: false); // when calling
@@ -32,7 +32,7 @@ String say1(String from, String msg, [String? device]) {
   return result;
 }
 
-/* Default parameter values */
+/* 2. Default parameter values */
 // Sets the [bold] and [hidden] flags ...
 void enableFlags3({bool bold = false, bool hidden = false}) {
   print(42);
@@ -57,24 +57,24 @@ void doStuff(
   print('gifts: $gifts');
 }
 
-/* Functions as first-class objects */
+/* 3. Functions as first-class objects */
 void printElement(int element) {
   print(element);
 }
 
 var loudify = (msg) => '!!! ${msg.toUpperCase()} !!!';
 
-/* Anonymous functions */
+/* 4. Anonymous functions */
 
-/* Lexical scope */
+/* 5. Lexical scope */
 bool topLevel = true;
 
-/* Lexical closures */
+/* 6. Lexical closures */
 Function makeAdder(int addBy) {
   return (int i) => addBy + i;
 }
 
-/* Testing functions for equality */
+/* 7. Testing functions for equality */
 void foo1() {} // A top-level function
 
 class A {
@@ -82,11 +82,11 @@ class A {
   void baz() {} // An instance method
 }
 
-/* Return values */
+/* 8. Return values */
 foo2() {} // If no return value is specified, the statement return null
 
 void main(List<String> arguments) {
-  /* Parameters */
+  /* 1. Parameters */
   // Optional positional parameter test
   assert(say1('Bob', 'Howdy') == 'Bob says Howdy');
   assert(say1('Bob', 'Howdy', 'smoke signal') ==
@@ -97,7 +97,7 @@ void main(List<String> arguments) {
   assert(say('Bob', 'Howdy') == 'Bob says Howdy with a carrier pigeon');
   doStuff();
 
-  /* The main() function */
+  /* 2. The main() function */
   // a simple main() function
   print('Hello, World!');
   // a command-line app that takes arguments
@@ -106,14 +106,14 @@ void main(List<String> arguments) {
   assert(int.parse(arguments[0]) == 1);
   assert(arguments[1] == 'test');
 
-  /* Functions as first-class objects */
+  /* 3. Functions as first-class objects */
   // pass a function as a parameter
   var list1 = [1, 2, 3];
   list1.forEach(printElement);
   // assign a function to a variable
   assert(loudify('hello') == '!!! HELLO !!!');
 
-  /* Anonymous functions */
+  /* 4. Anonymous functions */
   const list2 = ['apples', 'bananas', 'oranges'];
   list2.forEach((item) {
     print('${list2.indexOf(item)}: $item');
@@ -121,7 +121,7 @@ void main(List<String> arguments) {
   // can shorten it using arrow notation
   list2.forEach((item) => print('${list2.indexOf(item)}: $item'));
 
-  /* Lexical scope */
+  /* 5. Lexical scope */
   var insideMain = true;
 
   void myFunction() {
@@ -139,13 +139,13 @@ void main(List<String> arguments) {
   }
   myFunction();
 
-  /* Lexical closures */
+  /* 6. Lexical closures */
   var add2 = makeAdder(2);
   var add4 = makeAdder(4);
   assert(add2(3) == 5);
   assert(add4(3) == 7);
 
-  /* Testing functions for equality */
+  /* 7. Testing functions for equality */
   Function x;
   // Comparing top-level functions.
   x = foo1;
@@ -163,6 +163,6 @@ void main(List<String> arguments) {
   assert(y.baz == x); // These closures refer to the same instance (#2),
   assert(v.baz != w.baz); // These closures refer to different instances,
 
-  /* Return values */
+  /* 8. Return values */
   assert(foo2() == null);
 }

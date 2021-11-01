@@ -1,11 +1,11 @@
 void variableTest() {
-  /* Creating and initializing */
+  /* 0. Creating and initializing */
   var name1 = 'Alice'; // a reference to a String object.
   Object name2 = 'Bob'; // ont only String object, can specify the Object type
   String name3 = 'Cindy'; // explicitly declare the type that would be inferred
   print("var name $name1, Object name $name2, String name $name3");
 
-  /* Default value */
+  /* 1. Default value */
   int? lineCount1; // ? means it is a nullable type, have an initial value null.
   assert(lineCount1 == null); // condition is true, nothing happen
 
@@ -13,7 +13,7 @@ void variableTest() {
   lineCount2 = 42; // don’t have to initialize avariable where it’s declared
   print(lineCount2); // Dart can detect that lineCount2 is non-null when print
 
-  /* Late variables */
+  /* 2. Late variables */
   late String slogan; // can't always know variable is non-null, here comes late
   slogan = 'Geronino!';
   print(slogan);
@@ -22,7 +22,7 @@ void variableTest() {
    * initializing a expensive function _readThermometer() 
    * if temperature variable is never used(lazy initialization is handy) */
 
-  /* Final and const */
+  /* 3. Final and const */
   final name = 'Bob'; // without a type annotation, final can be set only once
   final String nickname = 'Bobby'; // you can’t change a final variable' value
   print("a guy named $name has a nickname $nickname");
