@@ -144,6 +144,7 @@ void switchCaseTest() {
 void assertTest() {
   var text = "non-null text";
   // Make sure the variable has a non-null value.
+  // ignore: unnecessary_null_comparison
   assert(text != null);
 
   var number = 50;
