@@ -1,3 +1,6 @@
+// ignore_for_file: annotate_overrides, unnecessary_overrides
+
+import 'string_apis.dart';
 import 'dart:math';
 
 class Pointnull {
@@ -45,9 +48,17 @@ class Point {
   // Delegates to the main constructor.
   Point.alongXAxis(double x) : this(x, 0);
 
+  // Instance methods
   double distanceTo(Point other) {
     var dx = x - other.x;
     var dy = y - other.y;
+    return sqrt(dx * dx + dy * dy);
+  }
+
+  // Static methods
+  static double distanceBetween(Point a, Point b) {
+    var dx = a.x - b.x;
+    var dy = a.y - b.y;
     return sqrt(dx * dx + dy * dy);
   }
 }
@@ -91,6 +102,199 @@ class Employee extends Person {
   }
 }
 
+// Factory constructors
+class Logger {
+  final String name;
+  bool mute = false;
+
+  // _cache is library-private, thanks to
+  // the _ in front of its name.
+  static final Map<String, Logger> _cache = <String, Logger>{};
+
+  factory Logger(String name) {
+    return _cache.putIfAbsent(name, () => Logger._internal(name));
+  }
+
+  factory Logger.fromJson(Map<String, Object> json) {
+    return Logger(json['name'].toString());
+  }
+
+  Logger._internal(this.name);
+
+  void log(String msg) {
+    if (!mute) print(msg);
+  }
+}
+
+/* 6. Methods: Operators */
+class Vector {
+  final int x, y;
+
+  Vector(this.x, this.y);
+
+  Vector operator +(Vector v) => Vector(x + v.x, y + v.y);
+  Vector operator -(Vector v) => Vector(x - v.x, y - v.y);
+
+  // Operator == and hashCode not shown.
+  // ···
+}
+
+/* 6. Methods: Getters and setters*/
+class Rectangle {
+  double left, top, width, height;
+
+  Rectangle(this.left, this.top, this.width, this.height);
+
+  // Define two calculated properties: right and bottom.
+  double get right => left + width;
+  set right(double value) => left = value - width;
+  double get bottom => top + height;
+  set bottom(double value) => top = value - height;
+}
+
+/* 6. Methods: Abstract methods */
+abstract class Doer {
+  // Define instance variables and methods...
+
+  void doSomething(); // Define an abstract method.
+}
+
+/* 7. Abstract classes */
+// This class is declared abstract and thus
+// can't be instantiated.
+abstract class AbstractContainer {
+  // Define constructors, fields, methods...
+
+  void updateChildren(); // Abstract method.
+}
+
+class EffectiveDoer extends Doer {
+  void doSomething() {
+    print("do something");
+    // Provide an implementation, so the method is not abstract here...
+  }
+}
+
+/* 8. Implicit interfaces */
+// A person. The implicit interface contains greet().
+class Personn {
+  // In the interface, but visible only in this library.
+  final String _name;
+
+  // Not in the interface, since this is a constructor.
+  Personn(this._name);
+
+  // In the interface.
+  String greet(String who) => 'Hello, $who. I am $_name.';
+}
+
+// An implementation of the Person interface.
+class Impostor implements Personn {
+  String get _name => '';
+
+  String greet(String who) => 'Hi $who. Do you know who I am?';
+}
+
+String greetBob(Personn person) => person.greet('Bob');
+
+/* 9. Extending a class */
+class Television {
+  void turnOn() {
+    // _illuminateDisplay();
+    // _activateIrSensor();
+  }
+  // ···
+}
+
+class SmartTelevision extends Television {
+  void turnOn() {
+    super.turnOn();
+    // _bootNetworkInterface();
+    // _initializeMemory();
+    // _upgradeApps();
+  }
+  // ···
+}
+
+/* 9. Extending a class: Overriding members */
+class Televisionn {
+  // ···
+  set contrast(int value) {
+    // ...
+  }
+}
+
+class SmartTelevisionn extends Televisionn {
+  @override
+  set contrast(num value) {
+    // ...
+  }
+  // ···
+}
+
+/* 9. Extending a class: noSuchMethod() */
+// o detect or react whenever code attempts to
+//use a non-existent method or instance variable
+class A {
+  // Unless you override noSuchMethod, using a
+  // non-existent member results in a NoSuchMethodError.
+  @override
+  void noSuchMethod(Invocation invocation) {
+    print('You tried to use a non-existent member: '
+        '${invocation.memberName}');
+  }
+}
+
+/* 10. Enumerated types: Using enums */
+enum Color { red, green, blue }
+
+/* 11. Adding features to a class: mixins */
+class Performer {
+  String? name;
+}
+
+mixin Musical {
+  bool canPlayPiano = false;
+  bool canCompose = false;
+  bool canConduct = false;
+
+  void entertainMe() {
+    if (canPlayPiano) {
+      print('Playing piano');
+    } else if (canConduct) {
+      print('Waving hands');
+    } else {
+      print('Humming to self');
+    }
+  }
+}
+
+mixin Aggressive {
+  // ...
+}
+
+mixin Demented {
+  // ...
+}
+
+class Musician extends Performer with Musical {
+  // ···
+}
+
+class Maestro extends Personn with Musical, Aggressive, Demented {
+  String? name;
+  Maestro(String maestroName) : super('') {
+    name = maestroName;
+    canConduct = true;
+  }
+}
+
+/* 12. Class variables and methods: Static variables */
+class Queue {
+  static const initialCapacity = 16;
+  // ···
+}
+
 void main(List<String> args) {
   /* 1. Using class members */
   var p = Point(2, 2);
@@ -98,7 +302,6 @@ void main(List<String> args) {
   assert(p.y == 2);
   // Invoke distanceTo() on p.
   double distance = p.distanceTo(Point(4, 4));
-  print(distance);
   // If p is non-null, set a variable equal to its y value.
   // var a = p?.y;
 
@@ -153,4 +356,75 @@ void main(List<String> args) {
   // Redirecting constructors
   // Redirecting constructors
   // Factory constructors
+  var logger = Logger('UI');
+  logger.log('Button clicked');
+
+  var logMap = {'name': 'UI'};
+  // ignore: unused_local_variable
+  var loggerJson = Logger.fromJson(logMap);
+
+  /* 6. Methods */
+  // Instance methods
+  print(distance);
+
+  // Operators
+  final v = Vector(2, 3);
+  final w = Vector(2, 2);
+
+  assert(v + w == Vector(4, 5));
+  assert(v - w == Vector(0, 1));
+
+  //Getters and setters
+  var rect = Rectangle(3, 4, 20, 15);
+  assert(rect.left == 3);
+  rect.right = 12;
+  assert(rect.left == -8);
+
+  // Abstract methods
+  EffectiveDoer effectiveDoer = EffectiveDoer();
+  effectiveDoer.doSomething();
+
+  /* 7. Abstract classes */
+
+  /* 8. Implicit interfaces */
+  print(greetBob(Personn('Kathy')));
+  print(greetBob(Impostor()));
+
+  /* 9. Extending a class */
+  // Overriding members
+  print('42'.padLeft(5)); // Use a String method.
+  print('42'.parseInt()); // Use an extension method.
+
+  /* 10. Enumerated types */
+  assert(Color.red.index == 0);
+  assert(Color.green.index == 1);
+  assert(Color.blue.index == 2);
+
+  List<Color> colors = Color.values;
+  assert(colors[2] == Color.blue);
+
+  var aColor = Color.blue;
+  // must handle all of the enum’s values
+  switch (aColor) {
+    case Color.red:
+      print('Red as roses!');
+      break;
+    case Color.green:
+      print('Green as grass!');
+      break;
+    default: // Without this, you see a WARNING.
+      print(aColor); // 'Color.blue'
+  }
+
+  /* 11. Adding features to a class: mixins */
+
+  /* 12. Class variables and methods */
+  // Static variables: Static variables aren’t initialized until they’re used.
+  assert(Queue.initialCapacity == 16);
+  // Static methods
+  var a2 = Point(2, 2);
+  var b2 = Point(4, 4);
+  var distance2 = Point.distanceBetween(a2, b2);
+  assert(2.8 < distance2 && distance2 < 2.9);
+  print(distance2);
 }
