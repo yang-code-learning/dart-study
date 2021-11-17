@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="scaffolded-by" content="https://github.com/dart-lang/sdk">
+  <title>quickstart</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="main.dart.js"></script>
+</head>
+
+<body>
+  <!-- 1. get started -->
+  <div id="output"></div>
+
+  <!-- 2. Fetching data dynamically -->
+  <h1>It's All About You</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th> </th>
+        <th>Enter value</th>
+        <th>Data type</th>
+        <th>JSON string</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td align="right">Favorite number:</td>
+        <td><input type="text" id="favoriteNumber"></td>
+        <td>integer</td>
+        <td><textarea class="result" id="intAsJson" readonly></textarea></td>
+      </tr>
+
+      <tr>
+        <td align="right">Do you know pi?</td>
+        <td><input type="text" id="valueOfPi"></td>
+        <td>double</td>
+        <td><textarea class="result" id="doubleAsJson" readonly></textarea></td>
+      </tr>
+
+      <tr>
+        <td align="right">What's your sign?</td>
+        <td><input type="text" id="horoscope"></td>
+        <td>String</td>
+        <td><textarea class="result" id="stringAsJson" readonly></textarea></td>
+      </tr>
+
+      <tr>
+        <td align="right">A few of your favorite things?</td>
+        <td>
+          <input type="text" id="favOne">
+          <input type="text" id="favTwo">
+          <input type="text" id="favThree">
+        </td>
+        <td>List&lt;String&gt;</td>
+        <td><textarea class="result" id="listAsJson" readonly></textarea></td>
+      </tr>
+
+      <tr>
+        <td align="right">I love chocolate!</td>
+        <td>
+          <form>
+            <input type="radio" name="chocolate" id="loveChocolate" checked>True
+            <input type="radio" name="chocolate" id="noLoveForChocolate" checked>False
+          </form>
+        </td>
+        <td>bool</td>
+        <td><textarea class="result" id="boolAsJson" readonly> </textarea></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div>
+    <label>All data together as a map</label><br>
+    <textarea id="mapAsJson" readonly></textarea>
+  </div>
+
+  <!-- 3.1 Connect Dart & html -->
+  <p id="RipVanWinkle">
+    RipVanWinkle paragraph.
+  </p>
+  <!-- 3.2 Add & remove DOM element -->
+  <h2>Procrastinator's Todo</h2>
+
+  <div>
+    <input id="to-do-input" type="text" placeholder="What needs to be done?">
+  </div>
+
+  <div>
+    <ul id="to-do-list">
+    </ul>
+  </div>
+  <button id="delete-all" type="button" style="float:right"> Delete All </button>
+
+  <!-- 3.3 Moving elements within the DOM tree -->
+  <h1>Anagram</h1>
+
+  <h3>Pile:</h3>
+  <div id="letterpile">
+  </div>
+
+  <h3>Word:</h3>
+  <div id="result">
+  </div>
+
+  <h3>Scrabble Value:</h3>
+  <p id="value"></p>
+
+  <button id="clearButton"> new letters </button>
+</body>
+
+</html>
