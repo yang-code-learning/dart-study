@@ -15,3 +15,12 @@ To run this server locally, run as follows:
 ```bash
 $ dart run bin/server.dart
 ```
+## What's more
+1. before run above command line, better try
+'dart pub get'
+
+2. if run in your local system, 0.0.0.0:8080 will not work
+0.0.0.0 must replace with your public ip address 
+(but on gitpod, just click the link)
+
+(my internet knowledege was not good, I don't know why)
