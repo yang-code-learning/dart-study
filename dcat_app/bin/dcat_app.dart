@@ -7,10 +7,10 @@ const lineNumber = 'line-number';
 
 void main(List<String> arguments) {
   getEnvInfo();
-  writeFile1();
   writeFile2();
+  // writeFile1();
   exitCode = 0; // presume success
-  final parser = ArgParser()..addFlag(lineNumber, negatable: false, abbr: 'n');
+  final parser = ArgParser()..addFlag(lineNumber, negatable: false, abbr: 'g');
 
   ArgResults argResults = parser.parse(arguments);
   final paths = argResults.rest;
@@ -51,7 +51,7 @@ Future<void> _handleError(String path) async {
 
 Future<void> writeFile1() async {
   final quotes = File('quotes.txt');
-  const stronger = 'That which does not kill us makes us stronger. -Nietzsche';
+  const stronger = 'That which does not kill us makes us stronger. -Nietzsche\n';
 
   await quotes.writeAsString(stronger, mode: FileMode.append);
 }
